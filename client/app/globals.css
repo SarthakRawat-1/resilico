@@ -1,0 +1,275 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-nunito);
+  --font-mono: var(--font-geist-mono);
+
+  /* Duolingo palette */
+  --color-green-400: #78e327;
+  --color-green-500: #58cc02;
+  --color-green-600: #46a302;
+  --color-green-700: #357a01;
+
+  --color-blue-400: #3dd0fe;
+  --color-blue-500: #1cb0f6;
+  --color-blue-600: #168dcf;
+
+  --color-red-400: #ff6868;
+  --color-red-500: #ff4b4b;
+  --color-red-600: #e33e3e;
+
+  --color-yellow-400: #ffd333;
+  --color-yellow-500: #ffc800;
+  --color-yellow-600: #e5b400;
+
+  --color-gray-50: #ffffff;
+  --color-gray-100: #f7f7f7;
+  --color-gray-200: #e5e5e5;
+  --color-gray-300: #afafaf;
+  --color-gray-400: #777777;
+  --color-gray-500: #4b4b4b;
+  /* Gamified Financial Palette (Semantic) */
+  --color-primary-light: #2dd4bf;
+  /* Teal 400 */
+  --color-primary: #14b8a6;
+  /* Teal 500 (Prosperity) */
+  --color-primary-dark: #0d9488;
+  /* Teal 600 */
+
+  --color-secondary-light: #818cf8;
+  /* Indigo 400 */
+  --color-secondary: #6366f1;
+  /* Indigo 500 (Trust) */
+  --color-secondary-dark: #4f46e5;
+  /* Indigo 600 */
+
+  --color-danger-light: #fb7185;
+  /* Rose 400 */
+  --color-danger: #f43f5e;
+  /* Rose 500 (Critical Coral) */
+  --color-danger-dark: #e11d48;
+  /* Rose 600 */
+
+  --color-warning-light: #fbbf24;
+  /* Amber 400 */
+  --color-warning: #f59e0b;
+  /* Amber 500 (Alert Amber) */
+  --color-warning-dark: #d97706;
+  /* Amber 600 */
+
+  --color-surface: #ffffff;
+  --color-surface-hover: #f8fafc;
+  /* Slate 50 */
+  --color-surface-active: #f1f5f9;
+  /* Slate 100 */
+}
+
+:root {
+  --background: #f8fafc;
+  /* Soft Slate background */
+  --foreground: #334155;
+  /* Slate 700 text */
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+@layer utilities {
+  .btn-3d {
+    transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    border-bottom-width: 4px;
+  }
+
+  .btn-3d:active {
+    border-bottom-width: 0px;
+    transform: translateY(4px);
+  }
+
+  /* Semantic color variants for buttons */
+  .btn-3d-primary {
+    background-color: var(--color-primary);
+    border-bottom-color: var(--color-primary-dark);
+    color: white;
+  }
+
+  .btn-3d-primary:hover {
+    background-color: var(--color-primary-light);
+  }
+
+  .btn-3d-secondary {
+    background-color: var(--color-secondary);
+    border-bottom-color: var(--color-secondary-dark);
+    color: white;
+  }
+
+  .btn-3d-secondary:hover {
+    background-color: var(--color-secondary-light);
+  }
+
+  .btn-3d-danger {
+    background-color: var(--color-danger);
+    border-bottom-color: var(--color-danger-dark);
+    color: white;
+  }
+
+  .btn-3d-danger:hover {
+    background-color: var(--color-danger-light);
+  }
+
+  .btn-3d-warning {
+    background-color: var(--color-warning);
+    border-bottom-color: var(--color-warning-dark);
+    color: white;
+  }
+
+  .btn-3d-warning:hover {
+    background-color: var(--color-warning-light);
+  }
+
+  .btn-3d-surface {
+    background-color: var(--color-surface-active);
+    border-bottom-color: var(--color-gray-300);
+    color: var(--color-gray-500);
+  }
+
+  .btn-3d-surface:hover {
+    background-color: var(--color-surface-hover);
+  }
+
+  .card-3d {
+    background: white;
+    border: 2px solid var(--color-gray-200);
+    border-radius: 1rem;
+    box-shadow: 0 4px 0 var(--color-gray-200);
+  }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-gray-300);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gray-400);
+}
+
+/* Driver.js Custom Gamified Theme (Duolingo Style) */
+.driverjs-theme {
+  background-color: #ffffff !important;
+  border-radius: 2rem !important;
+  /* Extremely round */
+  border: 4px solid #e2e8f0 !important;
+  border-bottom: 8px solid #cbd5e1 !important;
+  /* 3D bottom edge */
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+  padding: 32px !important;
+  font-family: var(--font-nunito), sans-serif !important;
+  color: #334155 !important;
+  width: 100% !important;
+  max-width: 650px !important;
+  /* Increased to accommodate longer descriptions gracefully */
+}
+
+.driverjs-theme .driver-popover-title {
+  font-weight: 900 !important;
+  font-size: 1.6rem !important;
+  color: var(--color-secondary-dark, #4f46e5) !important;
+  margin-bottom: 1rem !important;
+  text-align: center !important;
+  line-height: 1.2 !important;
+}
+
+.driverjs-theme .driver-popover-description {
+  font-weight: 700 !important;
+  font-size: 1.15rem !important;
+  color: #475569 !important;
+  line-height: 1.5 !important;
+  text-align: center !important;
+  margin-bottom: 1.5rem !important;
+}
+
+.driverjs-theme .driver-popover-footer {
+  margin-top: 1rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+
+.driverjs-theme .driver-popover-progress-text {
+  font-weight: 900 !important;
+  color: #94a3b8 !important;
+  font-size: 1rem !important;
+}
+
+/* Base button styles for 3D effect */
+.driverjs-theme .driver-popover-footer button {
+  border-radius: 1rem !important;
+  font-weight: 800 !important;
+  font-size: 1rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  padding: 0.8rem 1.5rem !important;
+  transition: transform 0.1s, border-bottom-width 0.1s !important;
+  cursor: pointer !important;
+}
+
+/* Primary "Next" Button */
+.driverjs-theme .driver-popover-next-btn {
+  background-color: var(--color-primary, #14b8a6) !important;
+  color: white !important;
+  border: 2px solid var(--color-primary-dark, #0d9488) !important;
+  border-bottom: 5px solid var(--color-primary-dark, #0d9488) !important;
+  text-shadow: none !important;
+}
+
+.driverjs-theme .driver-popover-next-btn:active {
+  transform: translateY(3px) !important;
+  border-bottom-width: 2px !important;
+}
+
+/* Secondary "Previous" Button */
+.driverjs-theme .driver-popover-prev-btn {
+  background-color: transparent !important;
+  color: #64748b !important;
+  border: 2px solid #cbd5e1 !important;
+  border-bottom: 4px solid #94a3b8 !important;
+}
+
+.driverjs-theme .driver-popover-prev-btn:active {
+  transform: translateY(2px) !important;
+  border-bottom-width: 2px !important;
+}
+
+/* Close button - Top right X */
+.driverjs-theme .driver-popover-close-btn {
+  color: #94a3b8 !important;
+  top: 15px !important;
+  right: 15px !important;
+  transition: color 0.2s !important;
+}
+
+.driverjs-theme .driver-popover-close-btn:hover {
+  color: #ef4444 !important;
+}
+
+/* Hide or style the default arrow to fit the bubble look better */
+.driverjs-theme .driver-popover-arrow {
+  display: none !important;
+  /* Hide arrow for a cleaner floating pill look */
+}
