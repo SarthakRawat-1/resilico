@@ -54,9 +54,11 @@ const stylesheet = [
 ];
 
 function getNodeColor(riskScore: number): string {
-    if (riskScore > 0.6) return "var(--color-danger)";
-    if (riskScore > 0.3) return "var(--color-warning)";
-    return "var(--color-primary)";
+    // Cytoscape does not parse CSS variables directly here.
+    // Values derived from globals.css Duolingo palette (true Green/Yellow/Red)
+    if (riskScore > 0.6) return "#ff4b4b"; // --color-red-500
+    if (riskScore > 0.3) return "#ffc800"; // --color-yellow-500
+    return "#58cc02"; // --color-green-500
 }
 
 export default function NetworkGraph({ members, exposures, onNodeClick, height = "500px" }: NetworkGraphProps) {
@@ -99,6 +101,15 @@ export default function NetworkGraph({ members, exposures, onNodeClick, height =
         animate: true,
         animationDuration: 800,
     };
+
+    useEffect(() => {
+        return () => {
+            if (cyRef.current) {
+                cyRef.current.destroy();
+                cyRef.current = null;
+            }
+        };
+    }, []);
 
     return (
         <div className="w-full rounded-xl overflow-hidden border border-slate-700/50" style={{ height }}>
