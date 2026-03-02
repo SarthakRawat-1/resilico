@@ -36,6 +36,9 @@ export function AnimatedNumber({
     }, [isInView, delay, value, motionValue]);
 
     useEffect(() => {
+        if (ref.current) {
+            ref.current.textContent = format(springValue.get());
+        }
         return springValue.on("change", (latest) => {
             if (ref.current) {
                 ref.current.textContent = format(latest);

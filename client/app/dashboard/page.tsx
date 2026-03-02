@@ -113,15 +113,18 @@ export default function DashboardPage() {
 
             {/* Stability Components */}
             <Card className="stability-breakdown-section">
-              <CardHeader className="border-b-2 border-gray-100 mb-4">
+              <CardHeader className="border-b-2 border-gray-100 mb-4 pb-4">
                 <CardTitle className="text-2xl">Stability Breakdown</CardTitle>
+                <p className="text-sm text-gray-500 font-bold mt-1">
+                  Components contributing to the overall score (weights in brackets)
+                </p>
               </CardHeader>
               <CardContent className="space-y-6">
                 {[
-                  { label: "Default Rate (40%)", value: 1 - (components?.default_rate || 0), color: "var(--color-danger)", bg: "bg-danger/20" },
+                  { label: "Repayment Rate (40%)", value: 1 - (components?.default_rate || 0), color: "var(--color-primary)", bg: "bg-primary/20" },
                   { label: "Liquidity Ratio (30%)", value: components?.avg_liquidity_ratio || 0, color: "var(--color-secondary)", bg: "bg-secondary/20" },
-                  { label: "Risk Concentration (20%)", value: 1 - (components?.risk_concentration_index || 0), color: "var(--color-warning)", bg: "bg-warning/20" },
-                  { label: "Network Resilience (10%)", value: components?.network_resilience_score || 0, color: "var(--color-primary)", bg: "bg-primary/20" },
+                  { label: "Risk Dispersion (20%)", value: 1 - (components?.risk_concentration_index || 0), color: "var(--color-warning)", bg: "bg-warning/20" },
+                  { label: "Network Resilience (10%)", value: components?.network_resilience_score || 0, color: "var(--color-cyan-500)", bg: "bg-cyan-500/20" },
                 ].map((item) => (
                   <div key={item.label}>
                     <div className="flex justify-between text-base font-bold mb-2">
@@ -141,29 +144,6 @@ export default function DashboardPage() {
               </CardContent>
             </Card>
 
-            {/* Top Recommendations */}
-            {recommendations.length > 0 && (
-              <BouncyCard delay={0.6} direction="left">
-                <Card className="top-recommendations-section">
-                  <CardHeader className="border-b-2 border-gray-100 mb-4">
-                    <CardTitle className="text-2xl">Top Policy Recommendations</CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    {recommendations.slice(0, 3).map((rec, i) => (
-                      <div key={i} className="p-4 rounded-2xl bg-gray-50 border-2 border-gray-200 flex flex-col sm:flex-row gap-4">
-                        <div className="flex-shrink-0 w-12 h-12 bg-white rounded-xl border-2 border-gray-200 flex items-center justify-center text-secondary font-extrabold text-xl shadow-sm">
-                          {i + 1}
-                        </div>
-                        <div>
-                          <h4 className="font-extrabold text-gray-800 text-lg">{rec.title}</h4>
-                          <p className="text-sm font-bold text-gray-500 mt-1 leading-relaxed">{rec.explanation}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </CardContent>
-                </Card>
-              </BouncyCard>
-            )}
           </div>
 
           {/* Right: Gauge */}

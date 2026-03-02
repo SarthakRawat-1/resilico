@@ -121,4 +121,36 @@ Each object must have:
         except Exception as e:
             print(f"Groq AI enhancement failed: {e}")
 
-    return recommendations
+    # Ensure exactly 3 recommendations are returned
+    default_recs = [
+        {
+            "title": "Continuous Monitoring",
+            "impact_score": 3.0,
+            "explanation": "Regularly review community metrics to catch early signs of liquidity stress before they manifest."
+        },
+        {
+            "title": "Financial Literacy",
+            "impact_score": 4.0,
+            "explanation": "Host financial workshops to help members manage emergency reserves and limit unnecessary borrowing."
+        },
+        {
+            "title": "Diversification Strategy",
+            "impact_score": 5.0,
+            "explanation": "Encourage lenders to distribute their exposure across multiple borrowers to mitigate individual risk."
+        }
+    ]
+
+    # Remove the generic "Community is Stable" if we are going to pad with better defaults
+    recommendations = [r for r in recommendations if r["title"] != "Community is Stable"]
+
+    # Pad with defaults if less than 3
+    if len(recommendations) < 3:
+        for rec in default_recs:
+            if len(recommendations) >= 3:
+                break
+            if not any(r["title"] == rec["title"] for r in recommendations):
+                recommendations.append(rec)
+
+    # Sort again and slice to exactly 3
+    recommendations.sort(key=lambda x: x.get("impact_score", 0), reverse=True)
+    return recommendations[:3]

@@ -112,7 +112,7 @@ cp .env.example .env
 # (Tables auto-create on first run)
 
 # Start the server
-uv run uvicorn main:app --host 0.0.0.0 --port 8000
+uv run uvicorn main:app --host 0.0.0.0 --port 8000 --reload
 ```
 
 **3. Frontend Setup**

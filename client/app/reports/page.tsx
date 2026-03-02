@@ -67,30 +67,27 @@ export default function ReportsPage() {
                         <CardContent className="p-6">
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                                 {[
-                                    { label: "Default Rate", value: components?.default_rate || 0, weight: "40%", inverted: true, color: "var(--color-danger)", bg: "bg-danger/10" },
-                                    { label: "Avg Liquidity Ratio", value: components?.avg_liquidity_ratio || 0, weight: "30%", inverted: false, color: "var(--color-secondary)", bg: "bg-secondary/10" },
-                                    { label: "Risk Concentration", value: components?.risk_concentration_index || 0, weight: "20%", inverted: true, color: "var(--color-warning)", bg: "bg-warning/10" },
-                                    { label: "Network Resilience", value: components?.network_resilience_score || 0, weight: "10%", inverted: false, color: "var(--color-primary)", bg: "bg-primary/10" },
-                                ].map((item) => {
-                                    const displayValue = item.inverted ? (1 - item.value) : item.value;
-                                    return (
-                                        <div key={item.label} className={`p-4 rounded-2xl border-2 border-gray-100 ${item.bg}`}>
-                                            <div className="flex justify-between items-start mb-2">
-                                                <p className="text-sm text-gray-500 font-extrabold uppercase">{item.label}</p>
-                                                <p className="text-xs text-gray-400 font-black px-2 py-1 bg-white rounded-lg border-2 border-gray-100 shadow-sm">{item.weight}</p>
-                                            </div>
-                                            <p className="text-3xl font-black text-gray-800 mt-2 mb-3">
-                                                {(item.value * 100).toFixed(1)}%
-                                            </p>
-                                            <div className="h-3 bg-white border border-gray-200 shadow-inner rounded-full overflow-hidden">
-                                                <div
-                                                    className="h-full rounded-full transition-all duration-1000 ease-out"
-                                                    style={{ width: `${displayValue * 100}%`, backgroundColor: item.color }}
-                                                />
-                                            </div>
+                                    { label: "Repayment Rate", value: 1 - (components?.default_rate || 0), weight: "40%", color: "var(--color-primary)", bg: "bg-primary/10" },
+                                    { label: "Liquidity Ratio", value: components?.avg_liquidity_ratio || 0, weight: "30%", color: "var(--color-secondary)", bg: "bg-secondary/10" },
+                                    { label: "Risk Dispersion", value: 1 - (components?.risk_concentration_index || 0), weight: "20%", color: "var(--color-warning)", bg: "bg-warning/10" },
+                                    { label: "Network Resilience", value: components?.network_resilience_score || 0, weight: "10%", color: "var(--color-cyan-500)", bg: "bg-cyan-500/10" },
+                                ].map((item) => (
+                                    <div key={item.label} className={`p-4 rounded-2xl border-2 border-gray-100 ${item.bg}`}>
+                                        <div className="flex justify-between items-start mb-2">
+                                            <p className="text-sm text-gray-500 font-extrabold uppercase">{item.label}</p>
+                                            <p className="text-xs text-gray-400 font-black px-2 py-1 bg-white rounded-lg border-2 border-gray-100 shadow-sm">{item.weight}</p>
                                         </div>
-                                    );
-                                })}
+                                        <p className="text-3xl font-black text-gray-800 mt-2 mb-3">
+                                            {(item.value * 100).toFixed(1)}%
+                                        </p>
+                                        <div className="h-3 bg-white border border-gray-200 shadow-inner rounded-full overflow-hidden">
+                                            <div
+                                                className="h-full rounded-full transition-all duration-1000 ease-out"
+                                                style={{ width: `${item.value * 100}%`, backgroundColor: item.color }}
+                                            />
+                                        </div>
+                                    </div>
+                                ))}
                             </div>
                         </CardContent>
                     </Card>

@@ -49,6 +49,30 @@ export default function NetworkPage() {
         },
     ];
 
+    const formatMetricValue = (value: number, metricTitle: string): string => {
+        // For weighted exposure (large currency values)
+        if (metricTitle === "Weighted Exposure") {
+            return `$${value.toFixed(0)}`;
+        }
+        
+        // For risk concentration (can be > 1, represents ratio)
+        if (metricTitle === "Risk Concentration") {
+            if (value >= 10) return value.toFixed(1);
+            if (value >= 1) return value.toFixed(2);
+            return value.toFixed(3);
+        }
+        
+        // For trust propagation and degree centrality (0-1 range typically)
+        if (metricTitle === "Trust Propagation" || metricTitle === "Degree Centrality") {
+            if (value === 0) return "0.000";
+            if (value >= 0.01) return value.toFixed(3);
+            if (value >= 0.001) return value.toFixed(4);
+            return value.toFixed(5);
+        }
+        
+        return value.toFixed(3);
+    };
+
     const topN = (data: Record<string, number> | undefined, n: number = 5) => {
         if (!data) return [];
         return Object.entries(data)
@@ -61,13 +85,13 @@ export default function NetworkPage() {
             <div>
                 <h1 className="text-4xl font-extrabold text-gray-800 tracking-tight">Network Graph</h1>
                 <p className="text-gray-500 font-bold mt-2 text-lg">
-                    Community financial exposure network. <span className="text-primary">Green = low risk</span>. <span className="text-danger">Red = high risk</span>. Size = reserves.
+                    Interactive community financial exposure network. Hover over nodes to explore connections.
                 </p>
             </div>
 
             <BouncyCard delay={0.1}>
-                <Card className="network-graph-container overflow-hidden p-1 border-4 border-gray-200 bg-white">
-                    <NetworkGraph members={members} exposures={exposures} height="500px" />
+                <Card className="network-graph-container overflow-hidden border-4 border-slate-700 bg-slate-900 shadow-xl">
+                    <NetworkGraph members={members} exposures={exposures} height="600px" />
                 </Card>
             </BouncyCard>
 
@@ -97,9 +121,7 @@ export default function NetworkPage() {
                                                     </span>
                                                 </div>
                                                 <span className="font-mono text-gray-500 font-bold tracking-wide">
-                                                    {typeof value === "number" && value > 100
-                                                        ? `$${value.toFixed(0)}`
-                                                        : value.toFixed(4)}
+                                                    {formatMetricValue(value, metric.title)}
                                                 </span>
                                             </div>
                                         );
